@@ -22,7 +22,7 @@ fn main() -> Result<()> {
     print!("{}", stdout_contents);
     eprint!("{}", stderr_contents);
 
-    if !output.status.success() {
+    if !output.status.success() || output.status.code().unwrap() == 1 {
         std::process::exit(1);
     }
 
