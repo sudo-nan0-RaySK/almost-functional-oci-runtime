@@ -7,7 +7,9 @@ use anyhow::{Context, Result};
 // Usage: your_docker.sh run <image> <command> <arg1> <arg2> ...
 
 fn main() -> Result<()> {
+
     setup_chroot_jail();
+
     let args: Vec<_> = std::env::args().collect();
     let command = &args[3];
     let command_args = &args[4..];
