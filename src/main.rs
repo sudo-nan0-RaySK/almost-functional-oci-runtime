@@ -19,8 +19,9 @@ fn main() -> Result<()> {
     print!("{}", stdout_contents);
     eprint!("{}", stderr_contents);
 
-    if !output.status.success() || output.status.code().unwrap() == 1 {
-        std::process::exit(1);
+    let child_exit_code = output.status.code().unwrap();
+    if !output.status.success() {
+        std::process::exit(child_exit_code);
     }
 
     Ok(())
