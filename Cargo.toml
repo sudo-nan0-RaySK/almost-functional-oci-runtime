@@ -31,3 +31,4 @@ tempfile = "3"                                                     # creating te
 regex = "1"                                                        # for regular expressions
 flate2 = "1.0.25"                                                  # for handling compressed data
 tar = "0.4.38"
+nix = { version = "0.26.4", features = ["sched"] }

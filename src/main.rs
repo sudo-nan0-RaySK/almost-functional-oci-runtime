@@ -3,12 +3,13 @@ use std::process::Output;
 use std::str;
 
 use anyhow::{Context, Result};
+use nix::sched::CloneFlags;
 
 // Usage: your_docker.sh run <image> <command> <arg1> <arg2> ...
 
 fn main() -> Result<()> {
-
     setup_chroot_jail();
+    unshare_namespaces();
 
     let args: Vec<_> = std::env::args().collect();
     let command = &args[3];
@@ -27,6 +28,13 @@ fn main() -> Result<()> {
     }
 
     Ok(())
+}
+
+#[cfg(any(target_os = "linux"))]
+fn unshare_namespaces() {
+    use nix::sched::unshare;
+    unshare(CloneFlags::CLONE_NEWPID)
+        .expect("Error while calling unshare(CLONE_NEWPID)");
 }
 
 fn setup_chroot_jail() {
