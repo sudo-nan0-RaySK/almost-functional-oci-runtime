@@ -19,7 +19,7 @@ edition = "2021"
 #
 # DON'T EDIT THIS!
 [dependencies]
-reqwest = { version = "0.11.13", features = ["json", "blocking"] } # http requests
+reqwest = { version = "0.11.13", default-features = false,  features = ["json", "blocking", "rustls-tls"] } # http requests
 bytes = "1.3.0"                                                    # helps wrap responses from reqwest
 tokio = { version = "1.23.0", features = ["full"] }                # async http requests
 libc = "0.2.103"                                                   # for syscalls like chroot
